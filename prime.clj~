@@ -1,0 +1,22 @@
+;; Primality check.
+;; Algorithm: Miller-Rabin
+;; implemented in Java's BigInteger#isProbablePrime.
+
+(def certainty 5)
+;; certainty - a measure of the uncertainty that the caller is willing
+;; to tolerate: if the call returns true the probability that this
+;; BigInteger is prime exceeds (1 - 0.5^certainty). The execution time
+;; of this method is proportional to the value of this parameter.
+
+(defn prime? [n]
+  "Return whether n is prime."
+  (.isProbablePrime (BigInteger/valueOf n) certainty))
+
+;; Usage example: effectively take 10001 primes starting from 3. Don't forget "2".
+(take 10001 
+      (filter prime? 
+              (take-nth 2 
+                        (range 1 Integer/MAX_VALUE))))
+
+
+;; Result => (3 5 7 11 13 17 19 23 29 31 37 41 ...
