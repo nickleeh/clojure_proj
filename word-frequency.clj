@@ -1,5 +1,5 @@
 (ns word-frequency
-  (:use [clojure.string :as str]))
+  (:use [clojure.string :as str :only [lower-case]]))
 
 (def fname "c:/Users/Nick/Downloads/sample_file.txt")
 
@@ -27,3 +27,9 @@
 (get-most-common 10)
 ;;=> (["the" 20005] ["of" 11038] ["and" 6524] ["in" 5659] ["to" 5387] ["a" 3810] ["was" 2565] ["by" 1922] ["for" 1773] ["that" 1567])
 
+;; Look up frequency for a specific word:
+(frequency-list "the") ;=> 20005
+
+;; Look up frequencies for a list of words:
+(select-keys frequency-list ["history" "the" "best"])
+;;=> {"history" 152, "the" 20005, "best" 26}
